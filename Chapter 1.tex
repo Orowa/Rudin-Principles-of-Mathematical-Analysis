@@ -1,0 +1,380 @@
+%This is my super simple Real Analysis Homework template
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+\usepackage{xcolor}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition} 
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem{subexercise}{Exercise}[exercise]
+ 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\e}{\epsilon}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+ 
+\title{Chapter 1: The Real and Complex Number Systems}
+\author{OS}
+\date\today
+%This information doesn't actually show up on your document unless you use the maketitle command below
+
+\begin{document}
+\maketitle %This command prints the title based on information entered above
+
+\section{The Real Number System}
+
+\subsection{Definitions and Theorems}
+
+We firstly introduce all the definitions and theorems from the body of the chapter that will be required to prove the exercises.
+
+\begin{definition}
+    
+    \label{order}
+    
+    An order on a set $S$ is a relation (``$<$'') that satisfies the following properties:
+    
+    \begin{enumerate}
+        \item Completeness: For all $x, y \in S$, $x < y$, $y < x$, or $x = y$
+        \item Transitivity: For all $x, y, z \in S$, if $x < y$ and $y < z$, then $x < z$
+    \end{enumerate}
+    
+    A set $S$ with a defined order is an ``ordered set''.
+    
+\end{definition}
+
+\begin{definition}
+
+    \label{bound}
+
+    Suppose we have a set $E \subset S$ where $S$ is an ordered set. An element $\beta \in S$ is an \textbf{upper bound} if $\beta > x: \forall x \in E$. A set that has an upper bound is ``bounded above''. Let the set of all upper bounds of $E$ be $U(E)$.
+    
+    Furthermore, $\beta$ is a \textbf{least upper bound} for $E$ if for all $\gamma \in U(E)$:
+    
+    \begin{enumerate}
+        \item $\beta$ is an upper bound ($\beta \in U(E)$)
+        \item $\beta$ is the smallest upper bound ($\beta \leq \gamma$)
+    \end{enumerate}
+    
+    In this case $\beta$ is also called the supremum of $E$ ($\sup(E)$).
+    
+\end{definition}
+
+\begin{definition}
+
+    \label{lubness}
+
+    A set $S$ has the least upper bound property if for each $E \subset S$, if:
+    
+    \begin{enumerate}
+        \item $E$ is nonempty
+        \item $E$ is bounded above
+    \end{enumerate}
+    
+    Then $\sup(E) \in S$. The real numbers $\R$ have the least upper bound property by construction.
+    
+\end{definition}
+
+\begin{definition}
+    
+    \label{ordered}
+    
+    A field $\F$ is a set with two defined operations, addition and multiplication, which satisfy the 11 field axioms (5 addition axioms, 5 multiplication axioms, 1 distributive axiom).
+    
+    An ordered field is a field $\F$ with a defined order, so that the following hold:
+    
+    \begin{enumerate}
+        \item $x + y < x + z$ if $x, y, z \in \F$ and $x < y$
+        \item $xy > 0$ if $x, y \in \F$ and $x, y > 0$
+    \end{enumerate}
+    
+\end{definition}
+
+\begin{theorem}
+    
+    \begin{enumerate}[(a)]
+        \item Archimedean principle: if $x, y \in \R$ and $x>0$, then there is a positive integer $n$ such that $nx > y$
+        \item Density of $\Q \subset \R$: if $x, y \in \R$ and $x < y$, there exists some rational $q$ such that $x < q < y$ 
+    \end{enumerate}
+    
+\end{theorem}
+
+\begin{proof}
+    
+    Archimedean principle:
+    
+    \begin{itemize}
+        \item Let $A =  \{nx: n \in \N \}$.
+        \item Suppose the principle does not hold. Then $y > nx$ $\forall n$.
+        \item By Definition \ref{bound}, $y$ is an upper bound of $A$, and $A$ is therefore bounded.
+        \item $A$ is a non-empty, bounded subset of $\R$. Therefore, by Definition \ref{lubness}, $A$ possesses a least upper bound. Call this $\beta = \sup(A)$.
+        \item Consider $\gamma = \beta - x < \beta$. By definition $\gamma$ is not an upper bound of $A$, which means that there exists some $mx \in A$ such that $mx > \gamma$.
+        \item Now by Definition \ref{ordered} $mx + x > \gamma + x \Rightarrow (m+1)x > \beta$.
+        \item However this is a contradiction, as $\beta$ is no longer an upper bound
+    \end{itemize}
+    
+\end{proof}
+
+\begin{proof}
+    
+    Density of $\Q \subset \R$:
+    
+    \begin{itemize}
+        \item \textbf{Lemma 1}: For any $x, y \in \R$ where $x < y$, there exists $n \in \N$ s.t. $x+ 1/n < y$.
+        \item Proof of Lemma 1:
+            \begin{itemize}
+                \item $y - x > 0$
+                \item $n(y-x) > 1$ for some $n \in \N$ (by Archimedean principle)
+                \item $y-x > 1/n$
+                \item $y > x + 1/n$
+            \end{itemize}
+        \item Therefore if either $x, y \in \Q$ then by Lemma 1 there is a rational $(x+1/n)$ or $(y-1/n)$ in between them, and the result follows. So assume neither are rational.
+        \item \textbf{Lemma 2}: All real numbers $x \in \R$ are the supremum for the set of rationals smaller than them.
+        \item Proof of Lemma 2:
+            \begin{itemize}
+                \item Denote $A$ as the set of all rationals smaller than $x$. This set is bounded above and non-empty\footnote{Non-emptiness also follows trivially from Archimedean principle}, so there is a least upper bound $\beta$.
+                \item If $\beta > x$ then there is a rational between $x$ and $\beta$, which is a contradiction.
+                \item If $\beta < x$, then by Lemma 1, $\beta + 1/m < x$.
+                \item Then consider also $(\beta - 1/m)$. Since this is smaller than the least upper bound $\beta$, that means there is some $a \in A$ such that $a > \beta - 1/m$.
+                \item Therefore $a + 1/m> \beta$
+                \item But note also that $a < \beta$ so $a + 1/m < \beta + 1/m < x$
+                \item Therefore $x > a + 1/m > \beta$
+                \item However $a + 1/m$ is a rational, therefore violating the fact that $\beta$ is a least upper bound. Therefore $\beta = x$.
+            \end{itemize}
+        \item Therefore, $x$ and $y$ are the supremum for the set of rationals smaller than them respectively. It follows that there must be a rational smaller than $y$ and greater than $x$. If there was not, then $y$ would not be the supremum of all smaller rationals, $x$ would be.
+    \end{itemize}
+    
+\end{proof}
+
+\begin{theorem}
+    
+    \label{power}
+    
+    For every $x > 0 \in \R$ and every integer $n > 0$, there is a unique positive real $y$ such that $y^n = x$. This number is written $y = x^{\frac{1}{n}}$.
+    
+\end{theorem}
+
+\begin{proof}
+    \begin{itemize}
+        \item Let $E$ contain all positive numbers $t$ such that $t^n < x$
+        \item Clearly, $E$ is bounded above (for example, by $(x+1)$, since $(x+1)^n > x$)
+        \item $E$ is also non-empty (If $x\geq1$, then choose any $t < 1$. For $x < 1$, note that by the Archimedean principle $\frac{1}{m} < x$, and as such  $(\frac{1}{m})^n < x$).
+        \item Therefore by Definition \ref{lubness}, $E$ has a least upper bound $y$. We wish to show $y^n = x$.
+        \item \textbf{Lemma 3}: For any $a, b \in \R$ and $n \in \N$, $(a+b)^n = a^n + br$ for some $r \in \R$.
+        \item Proof of Lemma 3:
+            \begin{itemize}
+                \item Suppose Lemma 3 holds for $(n-1)$. Then $(a+b)^{n-1} = a^{n-1} + br$.
+                \item Then $(a+b)(a+b)^{n-1} = a^n + bar + ba^{n-1} + b^2r = a^n + bs$ where $s \in \R$.
+                \item Lemma 3 holds for $n = 1$. As such, the result follows by induction.
+            \end{itemize}
+        \item Now suppose $y^n < x$. Then by Lemma 1, there exists some $m$ such that $y^n + 1/m < x$.
+        \item Now we can choose some $(y+1/p)^n = y^n + \frac{1}{p} r$.
+        \item By the Archimedean principle, there exists some $p \in \N$ so that $p \frac{1}{m} > r$. As such $\frac{r}{p}<\frac{1}{m}$ and $(y+1/p)^n < y^n + 1/m < x$. As such $y^n < x$ cannot be the supremum of $E$.
+        \item By an analogous process replace $1/p$ with a negative $p$ to show that $y^n > x$ cannot be a supremum. As such, $y^n = x$.
+    \end{itemize}
+\end{proof}
+
+\begin{corollary}
+    
+    If $a, b > 0 \in \R$ and $n \in \N$, then $(ab)^{1/n} = a^{1/n}b^{1/n}$.
+
+\end{corollary}
+
+\begin{proof}
+    
+    \begin{itemize}
+        \item Let $\alpha = a^{1/n}$ and $\beta = b^{1/n}$.
+        \item Then by Theorem \ref{power}, $\alpha^n = a$ and $\beta^n = b$.
+        \item Then $(ab) = \alpha^n \beta^n = (\alpha \beta)^n$ (the latter by the commutative property of the real field).
+        \item Therefore by \ref{power} again, $(ab)^{1/n} = \alpha \beta = a^{1/n} b^{1/n}$.
+    \end{itemize}
+      
+
+\end{proof}
+
+\textbf{Remarks:}
+
+\begin{itemize}
+    \item It's interesting how useful the Archimedean property is; especially once one recognizes that any positive real expression $x$ and any real $y$ can be written as $nx > y$. The introduction of indexing by natural numbers adds a lot of ease.
+    \item Note Lemma 1 - it keeps coming up. Worth bearing in mind.
+    \item The set of upper bounds of a set $U(E)$ and lower bounds $L(E)$ are useful constructs worth revisiting.
+    \item When proving whether two things are equal, always try to define them as $x$ and $y$ and show $x$ and $y$ must be equal (usually by showing they cannot be greater or less than each other).
+\end{itemize}
+
+\subsection{Exercises}
+
+\begin{exercise}
+    If $r$ is rational ($r \neq 0$) and $x$ is irrational, prove that $r+x$ and $rx$ are irrational.
+\end{exercise}
+
+\begin{proof}
+
+    \begin{itemize}
+        \item First note $(r+x) = \frac{m}{n} + x = \frac{m+n}{x}$.
+        \item Suppose $(r+x)$ is rational. Then $\frac{m+n}{x} = \frac{p}{q}$.
+        \item Then $x = \frac{q(m+n)}{p}$, which makes $x$ rational. [Contradiction].
+        \item Now note $(rx) = \frac{mx}{n}$.
+        \item Suppose $(rx)$ is rational. Then $\frac{mx}{n} = \frac{p}{q}$.
+        \item Then $x = \frac{np}{mq}$, which makes $x$ rational. [Contradiction].
+    \end{itemize}
+
+\end{proof}
+
+\begin{exercise}
+    Prove there is no rational number whose square is 12.
+\end{exercise}
+
+\begin{proof}
+
+    \begin{itemize}
+        \item First we will show that $\sqrt{3}$ is irrational. The results follow quickly from there.
+        \item Suppose by contradiction $\sqrt{3} = \frac{p}{q}$. Then $p^2 = 3q^2$.
+        \item Then $p^2 - q^2 = 2q^2$, and $\Rightarrow (p+q)(p-q) = 2q^2$.
+        \item Then product $(p+q)(p-q)$ must be even, which only arises when $p, q$ are both odd or both even
+        \item Since they cannot be both even, it follows they are both odd. However this means that $(p+q)(p-q) = 2k.2l = 4m = 2q^2$.
+        \item Therefore $q^2 = 2m$, which means $q$ is even and results in a contradiction.
+        \item To finalise note that if $(\frac{p}{q})^2 = 12$, then by rearranging terms one obtains $(\frac{p}{2q})^2 = 3$.
+    \end{itemize}
+
+\end{proof}
+
+\begin{exercise}
+    Prove Proposition 1.15.
+\end{exercise}
+
+\begin{proof}
+    TBC
+\end{proof}
+
+\begin{exercise}
+    Let $E$ be a nonempty subset of an ordered set; suppose $\alpha$ is a lower bound of $E$ and $\beta$ is an upper bound of $E$. Prove that $\alpha \leq \beta$.
+\end{exercise}
+
+\begin{proof}
+    \begin{itemize}
+        \item Choose some $e \in E$. By Definition \ref{bound}, $\beta \geq e$ and $e \geq \alpha$.
+        \item By the transitive property of ordered relations (Definition \ref{order}), $\beta \geq \alpha$.
+    \end{itemize}
+\end{proof}
+
+\begin{exercise}
+    Let $A$ be a nonempty subset of real numbers which is bounded below. Let $-A$ be the set of all numbers $-x$, where $x \in A$. Prove that $\inf(A) = -\sup(-A)$.
+\end{exercise}
+
+\begin{proof}
+    \begin{itemize}
+        \item Let $\beta = \inf(A)$.
+        \item For any $-x \in -A$, it follows there exists $x \in A$.
+        \item By definition, $\beta \leq x$.
+        \item By re-arranging, one obtains $-x \leq -\beta$.
+        \item Therefore, for an element in $a \in -A$, $-\beta \geq a$. $-\beta = \sup(-A)$, and $-\sup(-A) = \beta = \inf(A)$.
+    \end{itemize}
+\end{proof}
+
+\begin{exercise}
+    Fix $b > 1$.
+\end{exercise}
+
+\begin{subexercise}
+    If $m, n, p, q$ are integers, $n>0$, $q>0$, and $r = m/n = p/q$, prove that $(b^m)^{1/n} = (b^p)^{1/q}$.
+\end{subexercise}
+
+\begin{proof}
+    \begin{itemize}
+        \item Let $(b^m)^{1/n} = x$ and $(b^p)^{1/q} = y$.
+        \item Rearranging both using Theorem \ref{power} yields $b^m = x^n$ and $b^p = y^q$.
+        \item Taking powers results in $b^{mq} = x^{nq}$ and $b^{np} = y^{nq}$.
+        \item Note that $m/n = p/q \Rightarrow mq = np$. Therefore $b^{mq} = b^{np}$.
+        \item Therefore, $x^{nq} = y^{nq}$ and $x = y$. As a result $(b^m)^{1/n} = (b^p)^{1/q}$.
+    \end{itemize}
+\end{proof}
+
+\begin{subexercise}
+    (Cont). Hence it makes sense to define $b^{m/n} = (b^m)^{1/n}$. Prove that $b^{r+s} = b^r b^s$ if $r$ and $s$ are rational.
+\end{subexercise}
+
+\begin{proof}
+    \begin{itemize}
+        \item Let $b^{r+s} = x$. It follows $b^{r+s} = b^{m/n + p/q} = b^{(mq+np)/nq} = x$.
+        \item Therefore from Theorem \ref{power}, $b^{mq+np} = x^{nq}$.
+        \item Let $b^r b^s = y$. It follows $b^r b^s = b^{m/n} b^{p/q} = y$.
+        \item Taking both sides by $nq$ and using Ex 1.6.1 to simplify results in $b^{mq}.b^{np} = y^{nq} = b^{mq+np}$.
+        \item Therefore $x^{nq} = y^{nq}$ and $x = y$. The result $b^{r+s} = b^r b^s$ follows.
+    \end{itemize}
+\end{proof}
+
+\begin{subexercise}
+    (Cont). If $x$ is real, define $B(x)$ to be the set of all numbers $b^t$, where $t$ is rational and $t \leq x$. Prove that $b^r = \sup(B(r))$ when $r$ is rational.
+\end{subexercise}
+
+\begin{proof}
+    \begin{itemize}
+        \item Let $\beta = \sup(B(r))$. Suppose $b^r > \beta$. Then $\beta$ cannot be an upper bound as $r \in B(r)$.
+        \item Suppose $b^r < \beta$. Then for any $t \in B(r)$, $b^t \leq b^r$. Therefore $b^r$ is an upper bound for $B(r)$. But if $b^r < \beta$ then $\beta$ cannot be least upper bound.
+    \end{itemize}
+\end{proof}
+
+\begin{subexercise}
+    (Cont). Hence it makes sense to define $b^x = \sup(B(x))$ for every real $x$. Prove that $b^{x+y} = b^x b^y$ for all real $x$ and $y$.
+\end{subexercise}
+
+\begin{proof}
+    
+    \begin{itemize}
+    % \item \textbf{Lemma 4:} For any rational $s$, real $\e > 0$ and real $b \geq 1$, there exists some $n \in \N$ such that $b^{s} - b^{s-1/n} < \e$.
+    % \item Proof of Lemma 4:
+    %         \begin{itemize}
+    %             \item Choose some $1/m < \frac{\e}{b^s}$ for $m \in \N$.
+    %             \item Note that $\frac{m}{m-1} > 1$ and as such there exists\footnote{One can prove this rigorously using a similar proof to the Archimedean property. Let $A$ be the set of $x^n$ for all $n \in \N$. Suppose $x^n \ngeq b$ for some $n$. Then $A$ is bounded above and non-empty, so possesses a supremum $\beta$. Now consider $\beta/x < \beta$. Therefore $\beta/x$ is not an upper bound and there is some $x^n > \beta/x$. Rearranging, one obtains $x^{n+1} > \beta$. Therefore $\beta$ is not an upper bound of $A$, and cannot be its supremum. \qed} some $n \in \N$ such that $(\frac{m}{m-1})^n > b$.
+    %             \item Rearranging, one obtains $\frac{b^{1/n}-1}{b^{1/n}} < 1/m$.
+    %             \item Now rearrange the term as follows: $b^s - b^{s-1/n} = b^s(1- 1/b^{1/n}) = b^s \frac{b^{1/n}-1}{b^{1/n}} < \frac{b^s}{m} < \e$.
+    %         \end{itemize}    
+    \item \textbf{Lemma 4:} The set $C = \{b^s: s \in \Q\}$ is dense in $\R$ for $b > 1$.
+        \item Proof of Lemma 4:
+            \begin{itemize}
+                \item Suppose the Lemma is not true. Let there be some $x, y \in \R$ such that $x < y$ and there is no $b^s$ such that $x < b^s < y$.
+                \item Let $B(x) = \{b^t: b^t \leq x\ \land t \in \Q\}$ and $A(y) = \{b^t: b^t \geq y\ \land t \in \Q\}$. Let $\beta = \sup(B(x))$ and $\alpha = \inf(A(y))$.
+                \item Now choose some $n \in \N$ such that $(\frac{\alpha}{\beta})^n > b$. (This $n$ is guaranteed to exist as shown in the footnote\footnote{Let $A$ be the set of $x^n$ for all $n \in \N$. Suppose $x^n \ngeq b$ for some $n$. Then $A$ is bounded above and non-empty, so possesses a supremum $\beta$. Now consider $\beta/x < \beta$. Therefore $\beta/x$ is not an upper bound and there is some $x^n > \beta/x$. Rearranging, one obtains $x^{n+1} > \beta$. Therefore $\beta$ is not an upper bound of $A$, and cannot be its supremum. \qed}). Re-arranging, one obtains $b^{1/n} \beta < \alpha$.
+                \item Now consider $\beta/b^{1/n}$. Since $\beta/b^{1/n} < \beta$ it is not an upper bound and as such there is some $b^s \in B(x)$ such that $(\beta/b^{1/n}) < b^s < \beta$. Rearranging, one obtains $b^{s+1/n} > \beta$.
+                \item Since $b^s < \beta$, then $b^{1/n} b^s  < b^{1/n} \beta < \alpha$.
+                \item Therefore, $\beta < b^{s+1/n} < \alpha$. Since $s$ is rational so is $(s+1/n)$ so the result follows from contradiction.
+            \end{itemize}
+    \item \textbf{Lemma 5:} For any $s < (x+y) \land s \in \Q$, $b^s < b^x b^y$.
+        \item Proof of Lemma 5:
+            \begin{itemize}
+                \item If $s < (x+y), s = x+y-\epsilon_0$ for some $\epsilon_0 \in \R$
+                \item Choose rational $s_1$ such that $x > s_1 > x - 1/m$ for any arbitrarily large $m$ (the existence of $s_1$ follows from the density of the rationals).
+                \item Define $\epsilon_1 = x - s_1$. Note from the previous point $\epsilon_1$ can be made arbitrarily small.
+                \item Now define $s_2 = s - s_1$ (so $s = s_1 + s_2$). Note that $s_2$ is rational.
+                \item Substitutions result in $s_2 + (\epsilon_0 - \epsilon_1) = y$. Therefore if $\epsilon_1 < \epsilon_0$ it follows that $s_2 < y$. From previously we noted that $\epsilon_1$ can be made arbitrarily small. So we can choose $s_1 < x$ such that $s_2 < y$.
+                \item If $x > s_1$ and $y > s_2$, then it folows\footnote{To be rigorous, we show that for $x, y \in \R$, if $x>y$ then $b^x > b^y$. By the density of the rationals, there is some $y < p < x$ and therefore $b^p \in B(x) \not\in B(y)$. If $b^p \leq b^y$ then $b^p \in B(y)$. So $b^p > b^y$. Furthermore $b^x \geq b^p$ by definition. Therefore $b^x > b^y$. \qed} that $b^x > b^{s_1}$ and $b^y > b^{s_2} \Rightarrow b^x b^y > b^{s_1} b^{s_2} = b^{s_1 + s_2} = b^s$.
+            \end{itemize}
+        \item \textbf{Corollary 5:} For any $s > (x+y) \land s \in \Q$, $b^s > b^x b^y$. This follows by reversing the previous argument.
+        \item Now suppose $b^x b^y < b^{x+y}$. By Lemma 4, there exists some $b^x b^y <b^s< b^{x+y}$. If $s<(x+y)$, then by Lemma 5, $b^s < b^x b^y$, which is a contradiction. If $s>(x+y)$ then $b^s > b^{x+y}$, which is a contradiction.
+        \item Now suppose $b^x b^y > b^{x+y}$. By Lemma 4, there exists some $b^x b^y > b^s > b^{x+y}$. If $s>(x+y)$, then by Lemma 5, $b^s > b^x b^y$, which is a contradiction. If $s<(x+y)$ then $b^s < b^{x+y}$, which is a contradiction.
+    \end{itemize}
+\end{proof}
+
+\begin{exercise}
+    Fix $b > 1, y > 0$, and prove that there is a unique real $x$ such that $b^x = y$, by completing the following outline. (This $x$ is called the \textit{logarithm of $y$ to the base $b$}).
+\end{exercise}
+
+\begin{subexercise}
+    For any positive integer $n$, $b^n - 1 \geq n(b-1)$.
+\end{subexercise}
+
+\begin{proof}
+    
+\end{proof}
+
+\end{document}
