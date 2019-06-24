@@ -204,7 +204,8 @@ We firstly introduce all the definitions and theorems from the body of the chapt
     \item It's interesting how useful the Archimedean property is; especially once one recognizes that any positive real expression $x$ and any real $y$ can be written as $nx > y$. The introduction of indexing by natural numbers adds a lot of ease.
     \item Note Lemma 1 - it keeps coming up. Worth bearing in mind.
     \item The set of upper bounds of a set $U(E)$ and lower bounds $L(E)$ are useful constructs worth revisiting.
-    \item When proving whether two things are equal, always try to define them as $x$ and $y$ and show $x$ and $y$ must be equal (usually by showing they cannot be greater or less than each other).
+    \item When proving whether two things are equal, always try to define them as $x$ and $y$ and show $x$ and $y$ must be equal (usually by showing they cannot be greater or less than each other
+    \item If one can demonstrate a certain inequality holds against $1$ (i.e. $a < b$ for all $b > 1$) then note that any inequaity $x > y$ implies $x/y > 1$, and as such $b = x/y \Rightarrow a < x/y$. 
 \end{itemize}
 
 \subsection{Exercises}
@@ -324,21 +325,16 @@ We firstly introduce all the definitions and theorems from the body of the chapt
     (Cont). Hence it makes sense to define $b^x = \sup(B(x))$ for every real $x$. Prove that $b^{x+y} = b^x b^y$ for all real $x$ and $y$.
 \end{subexercise}
 
+\textcolor{blue}{This could be a lot more compact but it was a good chance to better understand the notion of density in $\R$.}
+
 \begin{proof}
     
     \begin{itemize}
-    % \item \textbf{Lemma 4:} For any rational $s$, real $\e > 0$ and real $b \geq 1$, there exists some $n \in \N$ such that $b^{s} - b^{s-1/n} < \e$.
-    % \item Proof of Lemma 4:
-    %         \begin{itemize}
-    %             \item Choose some $1/m < \frac{\e}{b^s}$ for $m \in \N$.
-    %             \item Note that $\frac{m}{m-1} > 1$ and as such there exists\footnote{One can prove this rigorously using a similar proof to the Archimedean property. Let $A$ be the set of $x^n$ for all $n \in \N$. Suppose $x^n \ngeq b$ for some $n$. Then $A$ is bounded above and non-empty, so possesses a supremum $\beta$. Now consider $\beta/x < \beta$. Therefore $\beta/x$ is not an upper bound and there is some $x^n > \beta/x$. Rearranging, one obtains $x^{n+1} > \beta$. Therefore $\beta$ is not an upper bound of $A$, and cannot be its supremum. \qed} some $n \in \N$ such that $(\frac{m}{m-1})^n > b$.
-    %             \item Rearranging, one obtains $\frac{b^{1/n}-1}{b^{1/n}} < 1/m$.
-    %             \item Now rearrange the term as follows: $b^s - b^{s-1/n} = b^s(1- 1/b^{1/n}) = b^s \frac{b^{1/n}-1}{b^{1/n}} < \frac{b^s}{m} < \e$.
-    %         \end{itemize}    
+   
     \item \textbf{Lemma 4:} The set $C = \{b^s: s \in \Q\}$ is dense in $\R$ for $b > 1$.
         \item Proof of Lemma 4:
             \begin{itemize}
-                \item Suppose the Lemma is not true. Let there be some $x, y \in \R$ such that $x < y$ and there is no $b^s$ such that $x < b^s < y$.
+                \item Suppose the Lemma is not true. Then there is some $x, y \in \R$ such that $x < y$ and there is no $b^s$ such that $x < b^s < y$.
                 \item Let $B(x) = \{b^t: b^t \leq x\ \land t \in \Q\}$ and $A(y) = \{b^t: b^t \geq y\ \land t \in \Q\}$. Let $\beta = \sup(B(x))$ and $\alpha = \inf(A(y))$.
                 \item Now choose some $n \in \N$ such that $(\frac{\alpha}{\beta})^n > b$. (This $n$ is guaranteed to exist as shown in the footnote\footnote{Let $A$ be the set of $x^n$ for all $n \in \N$. Suppose $x^n \ngeq b$ for some $n$. Then $A$ is bounded above and non-empty, so possesses a supremum $\beta$. Now consider $\beta/x < \beta$. Therefore $\beta/x$ is not an upper bound and there is some $x^n > \beta/x$. Rearranging, one obtains $x^{n+1} > \beta$. Therefore $\beta$ is not an upper bound of $A$, and cannot be its supremum. \qed}). Re-arranging, one obtains $b^{1/n} \beta < \alpha$.
                 \item Now consider $\beta/b^{1/n}$. Since $\beta/b^{1/n} < \beta$ it is not an upper bound and as such there is some $b^s \in B(x)$ such that $(\beta/b^{1/n}) < b^s < \beta$. Rearranging, one obtains $b^{s+1/n} > \beta$.
@@ -370,6 +366,124 @@ We firstly introduce all the definitions and theorems from the body of the chapt
 \end{subexercise}
 
 \begin{proof}
+    
+    \begin{itemize}
+        \item Note that $b^n - a^n = (b-a)(b^{n-1} + b^{n-2}a + \ldots + a^{n-1})$.
+        \item Substituting in $a = 1$ yields $b^n - 1 = (b-1)(b^{n-1} + b^{n-2}a + \ldots + a^{n-1}) > (b-1)(1 + 1 + \ldots + 1) = n(b-1)$.
+    \end{itemize}
+    
+\end{proof}
+
+\begin{subexercise}
+    (Cont). Hence $b-1 \geq n(b^{1/n} - 1)$.
+\end{subexercise}
+
+\begin{proof}
+    
+    \begin{itemize}
+        \item Note the previous result holds for any $b > 1$. Therefore $b^x > 1$ for any real $x \geq 0$.
+        \item Let $c = b^{1/n} > 1$. Therefore $c^n -1 \geq n(c-1) = b-1 \geq n(b^{1/n} - 1)$.
+    \end{itemize}
+    
+\end{proof}
+
+\begin{subexercise}
+    (Cont). If $t>1$ and $n > (b-1)/(t-1)$, then $b^{1/n}<t$.
+\end{subexercise}
+
+\begin{proof}
+    
+    \begin{itemize}
+        \item $b-1 \geq n(b^{1/n} - 1) > (b-1)(b^{1/n}-1)/(t-1) \Rightarrow (t-1) > b^{1/n} -1 \Rightarrow b^{1/n}<t$.
+    \end{itemize}
+    
+\end{proof}
+
+\begin{subexercise}
+    (Cont). If $w$ is such that $b^w < y$, then $b^{w+1/n} < y$ for sufficiently large $n$.
+\end{subexercise}
+
+\begin{proof}
+    
+    \begin{itemize}
+        \item \textcolor{brown}{Note $b^w < y \Rightarrow yb^{-w} > 1$. Let $t = y b^{-w}$. From previous section $b^{1/n} < t = y b^{-w}$, so $b^{w+1/n} < y$ (for $n > \frac{b-1}{yb^{-w} -1}$).}
+    \end{itemize}
+    
+\end{proof}
+
+\begin{subexercise}
+    (Cont). If $b^w > y$, then $b^{w-1/n} > y$ for sufficiently large $n$.
+\end{subexercise}
+
+\begin{proof}
+    
+    \begin{itemize}
+        \item $b^w > y \Rightarrow b^w/y > 1$.
+        \item Let $t = b^w/y$. Therefore $b^{1/n} < b^w/y$ for some $n$. It follows $b^{w-1/n} > y$.
+    \end{itemize}
+    
+\end{proof}
+
+\begin{subexercise}
+    (Cont). Let $A$ be the set of all $w$ such that $b^w < y$, and show that $x = \sup A$ satisfies $b^x = y$.
+\end{subexercise}
+
+\begin{proof}
+    
+    \begin{itemize}
+        \item Suppose by contradiction that $b^x < y$.
+        \begin{itemize}
+            \item Then $b^{x+1/n} < y$.
+            \item Then $(x + 1/n) \in A$.
+            \item But if $x < (x+1/n)$ then $x$ is not an upper bound of $A$, and therefore $x \neq \sub A$.
+        \end{itemize}
+        \item Suppose by contradiction that $b^x > y$.
+        \begin{itemize}
+            \item Then $b^{x-1/n} > y > b^w$ for all $w \in A$.
+            \item If $x$ is $\sup A$ then ${x-1/n} \in A$. By the density of the rationals there exists some ${x - 1/n} < w < x$.
+            \item If $w > {x - 1/n}$ then $b^w \geq b^{x-1/n}$ (see footnote 3 for a compact proof of this).
+            \item However this contradicts $b^{x-1/n} > b^w$ for all $w \in A$.
+        \end{itemize}
+    \end{itemize}
+    
+\end{proof}
+
+\begin{subexercise}
+    (Cont). Prove this $x$ is unique.
+\end{subexercise}
+
+\begin{proof}
+    
+    \begin{itemize}
+        \item Suppose by contradiction it was not, so $b^x = b^z = y$ where $x \neq y$.
+        \item Suppose $x < z$. Then by footnote 3, $b^x < b^z$, leading to a contradiction.
+    \end{itemize}
+    
+\end{proof}
+
+\begin{exercise}
+    Prove that no order can be defined on a complex field that turns it into an ordered field.
+\end{exercise}
+
+\begin{proof}
+    
+    \begin{itemize}
+        \item There exists some $x \in \C$ such that $x^2 = -1$. By Proposition 1.18(d), it follows that $-1 > 0$.
+        \item By Proposition 1.18(a), it follows that $1 < 0$.
+        \item However since $1^2 = 1$, $1 > 0$, leading to a contradiction.
+    \end{itemize}
+    
+\end{proof}
+
+\begin{exercise}
+    Suppose $z = a+bi, w=c+di$. Define $z < w$ if $a<c$, and also if $a=c$ and $b< d$. Prove that this turns the set of all complex numbers into an ordered set. Does this ordered set have the least upper bound property?
+\end{exercise}
+
+\begin{proof}
+    
+    \begin{itemize}
+        \item 
+    \end{itemize}
     
 \end{proof}
 
