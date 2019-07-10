@@ -482,7 +482,15 @@ We firstly introduce all the definitions and theorems from the body of the chapt
 \begin{proof}
     
     \begin{itemize}
-        \item 
+        \item Completeness follows trivially from the definition of the order as outlined.
+        \item For transitivity, $z = a+bi, w=c+di, u=e+fi$. If $z < w$ and $w < u$ we can consider each combination of order conditions:
+        \begin{itemize}
+            \item If $a < c$ and $c < e$ then $a < e$ and $z < u$.
+            \item If $a < c$ and $c = e$ then $a < e$ and $z < u$.
+            \item If $a = c$ and $c < e$ then $a < e$ and $z < u$.
+            \item If $a = c = e$ and $b < d < f$ then $a = e$ and $b < f$ and $z < u$.
+        \end{itemize}
+        \item The ordered set does not have the least upper bound property. Consider $A = \{z: \R(z) \leq 0\}$. The set $B = \{z: \R(z) > 0\}$ is the set of upper bounds, but there is no smallest element as there is no lower bound to $I(z)$ in this case.
     \end{itemize}
     
 \end{proof}
